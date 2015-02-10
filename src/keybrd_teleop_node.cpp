@@ -6,7 +6,7 @@ std::string command = "command";
 std::string velocity = "velocity";
 std::string enable = "enable";
 
-std::string name_node = "drive_bridge";
+std::string name_node = "keyboard_drive_bridge";
 
 int main(int argc, char** argv)
 {

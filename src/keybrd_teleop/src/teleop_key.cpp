@@ -278,8 +278,8 @@ void TeleopKeybrd::keyLoop()
 			ROS_INFO_STREAM( "Robot speed " << (mLocked?"locked ":"") << "- Linear: " << mLinear << " - Angular: " << mAngular <<  "\n\r" \
 			"[Q quit][1 Max_speed][2 for Max_speed/2][3 Max speed/3][L toggle lock][E enable]\r");
 
-			mVelPub.publish(vel);
-			mPubVelControl.publish(vel);
+            mVelPub.publish(vel); // publish "/cmd_vel" message
+            mPubVelControl.publish(vel); // public "/robot/command/velocity" message
 			dirty=false;
 		}
 	}
