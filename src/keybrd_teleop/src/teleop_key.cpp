@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string command, std::string velocity, std::string enable):
+TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string command, std::string velocity ):
 mLinear(0.0),
 mAngular(0.0),
 mMaxLin(1.5),
@@ -19,9 +19,7 @@ mLocked(false)
 {
 	mVelPub = m_nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
-	mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + command + "/" + velocity, 1000);
-	mPubEnableControl = m_nh.advertise<serial_bridge::Enable>("/" + robot + "/" + command + "/" + enable, 1000);
-	mSubEnable = m_nh.subscribe("/" + robot + "/" + enable, 1000, &TeleopKeybrd::enable_Callback, this);
+    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + command + "/" + velocity, 1000);
 
 	// >>>>> Parameters
 	string nodeName = ros::this_node::getName();
@@ -60,28 +58,6 @@ mLocked(false)
 		m_nh.setParam(paramStr, mKeyTimeout );
 	// <<<<< Parameters
 
-}
-
-void TeleopKeybrd::enable_Callback(const serial_bridge::Enable::ConstPtr& msg)
-{
-	mEnablePkg.enable = msg.get()->enable;
-	ROS_INFO("Enable now: %s", enable_string_convert(mEnablePkg.enable).c_str());
-	mSubEnable.shutdown();
-}
-
-std::string TeleopKeybrd::enable_string_convert(bool enable)
-{
-	return ((enable) ? "ON" : "OFF");
-}
-
-void TeleopKeybrd::enable(char c, char command)
-{
-	if (c == command)
-	{
-		mEnablePkg.enable = mEnablePkg.enable ? false : true;
-		ROS_INFO("Enable: %s\r", enable_string_convert(mEnablePkg.enable).c_str());
-		mPubEnableControl.publish(mEnablePkg);
-	}
 }
 
 void TeleopKeybrd::keyLoop()
@@ -193,15 +169,7 @@ void TeleopKeybrd::keyLoop()
                     dirty = true;*/
 					stop = true;
 					break;
-				}
-			case 'e':
-			case 'E':
-				{
-					ROS_DEBUG_STREAM("Enable\r");
-
-					enable('/', '/');
-					break;
-				}
+                }
 			case 'l':
 			case 'L':
 				{

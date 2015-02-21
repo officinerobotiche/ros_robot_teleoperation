@@ -4,7 +4,6 @@
 std::string serial_bridge_string = "robot";
 std::string command = "command";
 std::string velocity = "velocity";
-std::string enable = "enable";
 
 std::string name_node = "keyboard_drive_bridge";
 
@@ -36,13 +35,8 @@ int main(int argc, char** argv)
 	} else {
 			nh.setParam(name_node + "/velocity", velocity);
 	}
-	if (nh.hasParam(name_node + "/enable")) {
-			nh.getParam(name_node + "/enable", enable);
-	} else {
-			nh.setParam(name_node + "/enable", enable);
-	}
 
-	TeleopKeybrd teleop(nh, serial_bridge_string, command, velocity, enable);
+    TeleopKeybrd teleop(nh, serial_bridge_string, command, velocity );
 
 	teleop.keyLoop();
 

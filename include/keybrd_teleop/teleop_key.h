@@ -10,37 +10,31 @@
 class TeleopKeybrd
 {
 public:
-	TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string command, std::string velocity, std::string enable);
-  void keyLoop();
+    TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string command, std::string velocity );
+    void keyLoop();
 
 protected:
-	std::string  enable_string_convert(bool enable);
-	void enable(char c, char command);
-	void enable_Callback(const serial_bridge::Enable::ConstPtr& msg);
 
 private:
-  ros::NodeHandle m_nh;
+    ros::NodeHandle m_nh;
 
-  double mLinear;
-  double mAngular;
-  double mMaxLin;
-  double mMaxAng;
+    double mLinear;
+    double mAngular;
+    double mMaxLin;
+    double mMaxAng;
 
-  double mLinStep;
-  double mAngStep;
+    double mLinStep;
+    double mAngStep;
 
-  double mSpeedRatio;
+    double mSpeedRatio;
 
-  int mKeyTimeout;
+    int mKeyTimeout;
 
-  ros::Publisher mVelPub;
+    ros::Publisher mVelPub;
 
-	bool mLocked;
+    bool mLocked;
 
-	ros::Publisher mPubVelControl, mPubEnableControl;
-	ros::Subscriber mSubEnable;
-
-	serial_bridge::Enable mEnablePkg;
+    ros::Publisher mPubVelControl, mPubEnableControl;
 };
 
 
