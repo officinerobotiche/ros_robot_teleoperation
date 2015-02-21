@@ -84,8 +84,7 @@ void TeleopKeybrd::keyLoop()
 	ROS_INFO_STREAM("- Press 1 for Max_speed.\r");
 	ROS_INFO_STREAM("- Press 2 for Max speed/2.\r");
 	ROS_INFO_STREAM("- Press 3 for Max speed/3.\r");
-	ROS_INFO_STREAM("- Press L to toggle lock speeds\r");
-	ROS_INFO_STREAM("- Press E to send enable command\r");
+    ROS_INFO_STREAM("- Press L to toggle lock speeds\r");
 	ROS_INFO_STREAM("-----------------------------------\r");
 
 	bool stop = false;
@@ -244,7 +243,7 @@ void TeleopKeybrd::keyLoop()
 		if(dirty==true)
 		{
 			ROS_INFO_STREAM( "Robot speed " << (mLocked?"locked ":"") << "- Linear: " << mLinear << " - Angular: " << mAngular <<  "\n\r" \
-			"[Q quit][1 Max_speed][2 for Max_speed/2][3 Max speed/3][L toggle lock][E enable]\r");
+            "[Q quit][1 Max_speed][2 for Max_speed/2][3 Max speed/3][L toggle lock]\r");
 
             mVelPub.publish(vel); // publish "/cmd_vel" message
             mPubVelControl.publish(vel); // public "/robot/command/velocity" message
