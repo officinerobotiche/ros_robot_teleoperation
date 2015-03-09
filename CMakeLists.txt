@@ -97,10 +97,10 @@ set(keybrd_teleop_SRC
     src/keybrd_teleop/src/teleop_key.cpp
 )
 
-set(drive_teleop_SRC
-    src/drive_bridge_node.cpp
-    src/drive_bridge/Keyboard.cpp
-)
+#set(drive_teleop_SRC
+#    src/drive_bridge_node.cpp
+#    src/drive_bridge/Keyboard.cpp
+#)
 
 
 
@@ -109,8 +109,8 @@ add_executable(keybrd_teleop_key_node ${keybrd_teleop_SRC})
 target_link_libraries(keybrd_teleop_key_node ${catkin_LIBRARIES} ncurses)
 #add_dependencies(keybrd_teleop_key_node	${PROJECT_NAME}_generate_messages_cpp)
 
-add_executable(drive_bridge_node ${drive_teleop_SRC})
-target_link_libraries(drive_bridge_node ${catkin_LIBRARIES})
+#add_executable(drive_bridge_node ${drive_teleop_SRC})
+#target_link_libraries(drive_bridge_node ${catkin_LIBRARIES})
 #add_dependencies(drive_bridge_node serial_bridge_gencpp)
 
 

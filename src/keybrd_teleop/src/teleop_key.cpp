@@ -19,7 +19,7 @@ mLocked(false)
 {
 	mVelPub = m_nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
-    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + command + "/" + velocity, 1000);
+    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + command + "/" + velocity, 10);
 
 	// >>>>> Parameters
 	string nodeName = ros::this_node::getName();
@@ -34,7 +34,7 @@ mLocked(false)
 		m_nh.setParam(paramStr, mMaxLin );
 
 	paramStr = ( nameSpace + nodeName + "/teleop_key/Max_angular");
-	if(m_nh.hasParam( paramStr ))
+    if(m_nh.hasParam( paramStr ))
 		m_nh.getParam(paramStr, mMaxAng);
 	else
 		m_nh.setParam(paramStr, mMaxAng );

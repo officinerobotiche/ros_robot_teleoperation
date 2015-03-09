@@ -25,11 +25,13 @@ int main(int argc, char** argv)
 	} else {
 			nh.setParam(name_node + "/serial_bridge", serial_bridge_string);
 	}
+
 	if (nh.hasParam(name_node + "/command")) {
 			nh.getParam(name_node + "/command", command);
 	} else {
 			nh.setParam(name_node + "/command", command);
 	}
+
 	if (nh.hasParam(name_node + "/velocity")) {
 			nh.getParam(name_node + "/velocity", velocity);
 	} else {
