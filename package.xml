@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-    <name>robot_teleoperation_ros</name>
+    <name>ros_robot_teleoperation</name>
     <version>1.0.0</version>
     <description>Teleoperation nodes for serial_bridge package</description>
 
