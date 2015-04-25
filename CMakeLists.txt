@@ -94,7 +94,7 @@ link_directories(${catkin_LIBRARY_DIRS})
 
 set(keybrd_teleop_SRC
     src/keybrd_teleop_node.cpp
-    src/keybrd_teleop/src/teleop_key.cpp
+    src/keybrd_teleop/teleop_key.cpp
 )
 
 #set(drive_teleop_SRC

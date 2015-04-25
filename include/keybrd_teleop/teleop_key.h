@@ -29,8 +29,6 @@ private:
 
     int mKeyTimeout;
 
-    ros::Publisher mVelPub;
-
     bool mLocked;
 
     ros::Publisher mPubVelControl, mPubEnableControl;

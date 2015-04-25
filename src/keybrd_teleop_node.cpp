@@ -11,14 +11,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, name_node);
 	ros::NodeHandle nh;
 
-	//Load configuration
-
-    if (nh.hasParam("/info/robot_name")) {
-        nh.getParam("/info/robot_name", robot_name_string);
-    } else {
-        nh.setParam("/info/robot_name", robot_name_string);
-    }
-
+    //Load configuration
     if (nh.hasParam(name_node + "/cmd_vel")) {
             nh.getParam(name_node + "/cmd_vel", cmd_vel_string);
 	} else {
@@ -26,7 +19,7 @@ int main(int argc, char** argv)
     }
     TeleopKeybrd teleop(nh, robot_name_string, cmd_vel_string );
 
-	teleop.keyLoop();
+    teleop.keyLoop();
 
   return(0);
 }
