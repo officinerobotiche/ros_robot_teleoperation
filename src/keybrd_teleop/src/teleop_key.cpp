@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string command, std::string velocity ):
+TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string cmd_vel ):
 mLinear(0.0),
 mAngular(0.0),
 mMaxLin(1.5),
@@ -19,7 +19,7 @@ mLocked(false)
 {
 	mVelPub = m_nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
-    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + command + "/" + velocity, 10);
+    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + cmd_vel, 10);
 
 	// >>>>> Parameters
 	string nodeName = ros::this_node::getName();
