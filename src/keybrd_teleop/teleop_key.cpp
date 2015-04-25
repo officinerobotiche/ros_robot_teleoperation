@@ -17,9 +17,7 @@ mSpeedRatio(1.0),
 mKeyTimeout(50),
 mLocked(false)
 {
-	mVelPub = m_nh.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
-
-    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + robot + "/" + cmd_vel, 10);
+    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + cmd_vel, 10);
 
 	// >>>>> Parameters
 	string nodeName = ros::this_node::getName();
@@ -245,8 +243,7 @@ void TeleopKeybrd::keyLoop()
 			ROS_INFO_STREAM( "Robot speed " << (mLocked?"locked ":"") << "- Linear: " << mLinear << " - Angular: " << mAngular <<  "\n\r" \
             "[Q quit][1 Max_speed][2 for Max_speed/2][3 Max speed/3][L toggle lock]\r");
 
-            mVelPub.publish(vel); // publish "/cmd_vel" message
-            mPubVelControl.publish(vel); // public "/robot/command/velocity" message
+            mPubVelControl.publish(vel); // publish "/cmd_vel" message
 			dirty=false;
 		}
 	}
