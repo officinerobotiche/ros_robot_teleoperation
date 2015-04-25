@@ -2,8 +2,7 @@
 #include "std_msgs/String.h"
 
 std::string serial_bridge_string = "robot";
-std::string command = "command";
-std::string velocity = "velocity";
+std::string cmd_vel_string = "cmd_vel";
 
 std::string name_node = "keyboard_drive_bridge";
 
@@ -26,19 +25,12 @@ int main(int argc, char** argv)
 			nh.setParam(name_node + "/serial_bridge", serial_bridge_string);
 	}
 
-	if (nh.hasParam(name_node + "/command")) {
-			nh.getParam(name_node + "/command", command);
+    if (nh.hasParam(name_node + "/cmd_vel")) {
+            nh.getParam(name_node + "/cmd_vel", cmd_vel_string);
 	} else {
-			nh.setParam(name_node + "/command", command);
-	}
-
-	if (nh.hasParam(name_node + "/velocity")) {
-			nh.getParam(name_node + "/velocity", velocity);
-	} else {
-			nh.setParam(name_node + "/velocity", velocity);
-	}
-
-    TeleopKeybrd teleop(nh, serial_bridge_string, command, velocity );
+            nh.setParam(name_node + "/cmd_vel", cmd_vel_string);
+    }
+    TeleopKeybrd teleop(nh, serial_bridge_string, cmd_vel_string );
 
 	teleop.keyLoop();
 
