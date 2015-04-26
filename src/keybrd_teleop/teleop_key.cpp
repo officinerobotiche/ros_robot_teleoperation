@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string cmd_vel ):
+TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string cmd_vel ):
 mLinear(0.0),
 mAngular(0.0),
 mMaxLin(1.5),

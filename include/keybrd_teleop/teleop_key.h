@@ -9,7 +9,7 @@
 class TeleopKeybrd
 {
 public:
-    TeleopKeybrd(const ros::NodeHandle& nh, std::string robot, std::string cmd_vel);
+    TeleopKeybrd(const ros::NodeHandle& nh, std::string cmd_vel);
     void keyLoop();
 
 protected:
