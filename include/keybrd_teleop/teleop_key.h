@@ -5,6 +5,9 @@
 #include <std_srvs/Empty.h>
 
 #include <stdio.h>
+#include <csignal>
+
+
 
 class TeleopKeybrd
 {
@@ -13,8 +16,18 @@ public:
     void keyLoop();
 
 protected:
+    // >>>>> Ctrl+C handler
+    /*! Ctrl+C handler
+     */
+    static void sighandler(int signo)
+    {
+        TeleopKeybrd::_stopping = (signo == SIGINT);
+    }
+    // <<<<< Ctrl+C handler
 
 private:
+    static bool _stopping;
+
     ros::NodeHandle m_nh;
 
     double mLinear;
