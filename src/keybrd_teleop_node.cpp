@@ -11,11 +11,6 @@ int main(int argc, char** argv)
 	ros::NodeHandle nh;
 
     //Load configuration
-    if (nh.hasParam(name_node + "/cmd_vel")) {
-            nh.getParam(name_node + "/cmd_vel", cmd_vel_string);
-	} else {
-            nh.setParam(name_node + "/cmd_vel", cmd_vel_string);
-    }
     TeleopKeybrd teleop(nh, cmd_vel_string );
 
     teleop.keyLoop();

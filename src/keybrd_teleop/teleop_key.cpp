@@ -26,7 +26,7 @@ TeleopKeybrd::TeleopKeybrd(const ros::NodeHandle& nh, std::string cmd_vel ):
     sigaction(SIGINT, &sigAct, 0);
     // <<<<< Ctrl+C handling
 
-    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>("/" + cmd_vel, 10);
+    mPubVelControl = m_nh.advertise<geometry_msgs::Twist>( cmd_vel, 10);
 
     // >>>>> Parameters
     string nodeName = ros::this_node::getName();
