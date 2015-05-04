@@ -100,19 +100,8 @@ void TeleopKeybrd::keyLoop()
     {
         if( stop || TeleopKeybrd::_stopping )
         {
-            // >>>>> Forcce motor stopping
-            
-            mLinear = 0.0;
-            mAngular = 0.0;
-            
-            geometry_msgs::Twist vel;
-            vel.linear.x = mLinear;
-            vel.angular.z = mAngular;
-            
             ROS_INFO_STREAM( "... exiting ... Robot stopped!");
-
-            mPubVelControl.publish(vel); // publish "cmd_vel" message
-            // <<<<< Forcce motor stopping
+            
             break;
         }
 
@@ -127,6 +116,13 @@ void TeleopKeybrd::keyLoop()
 
         switch(c)
         {
+        case 'q':
+        case 'Q':
+        {
+            ROS_DEBUG_STREAM("EXIT, 'Q' pressed \r");
+            stop = true;
+            continue;
+        }
         case KEY_LEFT:
         {
             ROS_DEBUG_STREAM("LEFT\r");
@@ -180,13 +176,6 @@ void TeleopKeybrd::keyLoop()
             mSpeedRatio = 0.333333;
             dirty = true;
             break;
-        }
-        case 'q':
-        case 'Q':
-        {
-            ROS_DEBUG_STREAM("EXIT\r");
-            
-            stop = true;
         }
         case 'l':
         case 'L':
@@ -268,6 +257,14 @@ void TeleopKeybrd::keyLoop()
             dirty=false;
         }
     }
+    
+    // >>>>> Force motor stopping
+    geometry_msgs::Twist vel;
+    vel.linear.x = 0.0;
+    vel.angular.z = 0.0;
+    
+    mPubVelControl.publish(vel); // publish "cmd_vel" message
+    // <<<<< Force motor stopping
 
     endwin();
 
