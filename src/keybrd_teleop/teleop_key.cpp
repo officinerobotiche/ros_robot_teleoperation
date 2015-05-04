@@ -105,6 +105,7 @@ void TeleopKeybrd::keyLoop()
             mLinear = 0.0;
             mAngular = 0.0;
             
+            geometry_msgs::Twist vel;
             vel.linear.x = mLinear;
             vel.angular.z = mAngular;
             
