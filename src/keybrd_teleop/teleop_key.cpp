@@ -96,10 +96,24 @@ void TeleopKeybrd::keyLoop()
 
     bool stop = false;
 
-    while(!stop)
+    while(1)
     {
-        if(TeleopKeybrd::_stopping)
+        if( stop || TeleopKeybrd::_stopping )
+        {
+            // >>>>> Forcce motor stopping
+            
+            mLinear = 0.0;
+            mAngular = 0.0;
+            
+            vel.linear.x = mLinear;
+            vel.angular.z = mAngular;
+            
+            ROS_INFO_STREAM( "... exiting ... Robot stopped!");
+
+            mPubVelControl.publish(vel); // publish "cmd_vel" message
+            // <<<<< Forcce motor stopping
             break;
+        }
 
         dirty = false;
 
@@ -170,14 +184,8 @@ void TeleopKeybrd::keyLoop()
         case 'Q':
         {
             ROS_DEBUG_STREAM("EXIT\r");
-            // The following code is not needed
-            // the motor driver must put speed to 0.0
-            // if it does not receive commands
-            /*mLinear = 0.0;
-                    mAngular = 0.0;
-                    dirty = true;*/
+            
             stop = true;
-            break;
         }
         case 'l':
         case 'L':
@@ -255,7 +263,7 @@ void TeleopKeybrd::keyLoop()
             ROS_INFO_STREAM( "Robot speed " << (mLocked?"locked ":"") << "- Linear: " << mLinear << " - Angular: " << mAngular <<  "\n\r" \
                              "[Q quit][1 Max_speed][2 for Max_speed/2][3 Max speed/3][L toggle lock]\r");
 
-            mPubVelControl.publish(vel); // publish "/cmd_vel" message
+            mPubVelControl.publish(vel); // publish "cmd_vel" message
             dirty=false;
         }
     }
