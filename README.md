@@ -3,4 +3,4 @@ This package contains the ROS nodes used to teleoperate the robots based on uNav
 
 required to install this node:
 
-sudo apt-get install libncurses-dev
+sudo apt-get install libncurses5-dev
